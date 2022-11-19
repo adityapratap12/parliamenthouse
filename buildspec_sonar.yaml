@@ -1,15 +1,15 @@
 version: 0.2
-# env:
-#   secrets-manager:
-#     LOGIN: prod/sonar:sonartoken
-#     HOST: prod/sonar:HOST
-#     Organization: prod/sonar:Organization
-#     Project: prod/sonar:Project
+env:
+  secrets-manager:
+    LOGIN: prod/sonar:sonartoken
+    HOST: prod/sonar:HOST
+    Organization: prod/sonar:Organization
+    Project: prod/sonar:Project
 phases:
   install:
     runtime-versions:
-    java: openjdk8
-      
+    java: openjdk8    
+
   pre_build:
     commands:
       - apt-get update
