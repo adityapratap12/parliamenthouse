@@ -8,9 +8,7 @@ env:
 phases:
   install:
     runtime-versions:
-    java: openjdk8 
-    nodejs: 16   
-
+      nodejs: 16  
   pre_build:
     commands:
       - apt-get update
