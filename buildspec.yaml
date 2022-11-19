@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime_version:
+    nodejs: 16
+    commands:
+      - echo "Installing node 16"
+  pre_build:
+    commands:
+      - echo "moving to pre_build section"
+      - npm install
+      - echo "npm install task completed"
+      - mkdir new
+  build:
+    commands:
+      - echo Building...
+      - ls -a
+      - mv appspec.yml new
+      - mv scripts new
+      - ls new
+      
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: new
