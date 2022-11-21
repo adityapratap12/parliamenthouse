@@ -17,9 +17,3 @@ phases:
       - unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
       - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
       - export SONAR_SCANNER_OPTS="-server"
-  triggering:
-      events:
-        - pull_request
-      cache:
-        cache_paths:
-          - ~/.sonar
