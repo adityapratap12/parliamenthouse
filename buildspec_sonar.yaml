@@ -19,6 +19,6 @@ phases:
       - export SONAR_SCANNER_OPTS="-server"
   build:
     commands:
-      - sonar-scanner -Dsonar.organization=adityapratap12 -Dsonar.projectKey=adityapratap12_parliamenthouse -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io #-sonar.analysis.* 
+      - sonar-scanner -Dsonar.organization=adityapratap12 -Dsonar.projectKey=adityapratap12_parliamenthouse -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -sonar.analysis.* 
       - Dsonar.analysis.mode=preview -Dsonar.report.export.path=sonar-report.json
       - ls
