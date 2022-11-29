@@ -1,35 +1,41 @@
----
+##Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+##SPDX-License-Identifier: MIT-0
 version: 0.2
-
 phases:
   install:
     commands:
-      - wget https://dl.bintray.com/jeremy-long/owasp/dependency-check-5.3.0-release.zip
-      - unzip dependency-check-*
-      - export PATH=dependency-check/bin:$PATH
-      - npm install
-  build:
+      - echo "install phase....."
+  pre_build:
     commands:
-      - mkdir -p nvd  # Will store nvd here
+      - scanid=$(curl "$OwaspZapURL/JSON/ascan/action/scan/?apikey=$OwaspZapApiKey&recurse=true&inScopeOnly=&scanPolicyName=&method=&postData=&contextId=&url=$ApplicationURL" | jq -r '.scan')
+      - echo "scan id is " $scanid
       - |
-        dependency-check.sh \
-          --project my-project \
-          -s . \
-          -f JUNIT \
-          --disableNuspec \
-          --disableAssembly \
-          -d nvd \
-          --failOnCVSS $FAIL_ON_CVSS  
-      - ls nvd       
-# Caching the nvd database so each run doesn't download the
-# entire nvd
-cache:
-  paths:
-    - nvd/**/*
-
-reports:
-  # ARN of the Codebuild Report created in Cloudformation
-  arn:aws:codebuild:us-east-1:111111111111:report-group/OwaspReportGroup-ABC123abc987:
-    files:
-      - dependency-check-junit.xml
-    file-format: JunitXml
+        stat=50;
+        while [ "$stat" != 100 ]; do/-+p7uyhzqa   .
+          stat=$(curl "$OwaspZapURL/JSON/ascan/view/status/?apikey=$ " | jq -r '.status');
+          echo "OWASP ZAP scan status is $stat"
+          echo "OWASP Zap analysis status is in progress...";
+          sleep 5;
+        done
+        echo "OWASP Zap analysis status is completed..."; 
+      - high_alerts=$(curl "$OwaspZapURL/JSON/alert/view/alertsSummary/?apikey=$OwaspZapApiKey&baseurl=$ApplicationURL" | jq -r '.alertsSummary.High')
+      - medium_alerts=$(curl "$OwaspZapURL/JSON/alert/view/alertsSummary/?apikey=$OwaspZapApiKey&baseurl=$ApplicationURL" | jq -r '.alertsSummary.Meduim')
+      - echo "high alerts are $high_alerts"    
+  build:
+    commands: 
+      - curl "$OwaspZapURL/OTHER/core/other/jsonreport/?apikey=$OwaspZapApiKey" | jq . > zap-scan-results.json
+      - echo "build stage completed"
+  post_build:
+    commands:
+      - | 
+        jq "{ \"messageType\": \"CodeScanReport\", \"reportType\": \"OWASP-Zap\", \
+        \"createdAt\": $(date +\"%Y-%m-%dT%H:%M:%S.%3NZ\"), \"source_repository\": env.CODEBUILD_SOURCE_REPO_URL, \
+        \"source_branch\": env.CODEBUILD_SOURCE_VERSION, \
+        \"build_id\": env.CODEBUILD_BUILD_ID, \
+        \"source_commitid\": env.CODEBUILD_RESOLVED_SOURCE_VERSION, \
+        \"report\": . }" zap-scan-results.json > payload.json
+        aws lambda invoke --function-name ImpToSecurityHubEKS --payload file://payload.json owaspzap_scan_report.json && echo "LAMBDA_SUCCEDED" || echo "LAMBDA_FAILED";
+      - if [ $high_alerts != 0 ] || [ $medium_alerts != 0 ]; then echo "there are high or medium alerts.. failing the build" && exit 1; else exit 0; fi
+artifacts:
+  type: zip
+  files: '**/*'
