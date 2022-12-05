@@ -21,11 +21,11 @@ phases:
     commands:
       - sonar-scanner -Dsonar.organization=adityapratap12 -Dsonar.projectKey=adityapratap12_parliamenthouse -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io #-sonar.analysis.* 
       # - sonar-scanner -Dsonar.organization=adityapratap12 -Dsonar.projectKey=adityapratap12_parliamenthouse -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io
-      - curl https://sonarcloud.io/summary/overall?id=adityapratap12_parliamenthouse > result.json
-      - curl https://sonarcloud.io/api/project_badges/measure?project=adityapratap12_parliamenthouse&metric=coverage > result.json
-      - curl https://sonarcloud.io/api/project_badges/measure?project=adityapratap12_parliamenthouse&metric=ncloc > result.json
-      - curl https://sonarcloud.io/api/project_badges/measure?project=adityapratap12_parliamenthouse&metric=code_smells > result.json  
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=adityapratap12_parliamenthouse >result.json
-      - cat result.json
+      - curl https://sonarcloud.io/summary/overall?id=adityapratap12_parliamenthouse > sonar_result.json
+      - curl https://sonarcloud.io/api/project_badges/measure?project=adityapratap12_parliamenthouse&metric=coverage > sonar_result.json
+      - curl https://sonarcloud.io/api/project_badges/measure?project=adityapratap12_parliamenthouse&metric=ncloc > sonar_result.json
+      - curl https://sonarcloud.io/api/project_badges/measure?project=adityapratap12_parliamenthouse&metric=code_smells > sonar_result.json  
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=adityapratap12_parliamenthouse >sonar_result.json
+      - cat sonar_result.json
       - ls
 
