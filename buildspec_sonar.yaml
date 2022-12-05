@@ -24,7 +24,7 @@ phases:
       - curl https://sonarcloud.io/summary/overall?id=adityapratap12_parliamenthouse > result.json
       - curl https://sonarcloud.io/api/project_badges/measure?project=adityapratap12_parliamenthouse&metric=coverage > result.json
       - curl https://sonarcloud.io/api/project_badges/measure?project=adityapratap12_parliamenthouse&metric=ncloc > result.json
-      - curl https://sonarcloud.io/api/project_badges/measure?project=adityapratap12_parliamenthouse&metric=code_smells > result.json      - cat result.json
+      - curl https://sonarcloud.io/api/project_badges/measure?project=adityapratap12_parliamenthouse&metric=code_smells > result.json  
+      - cat result.json
       - ls
 
-# sdsds
