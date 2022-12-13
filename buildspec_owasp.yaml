@@ -18,3 +18,6 @@ artifacts:
      - "**/*"
   discard-paths: no
   base-directory: ZAP_2.11.1/report
+
+  #looking for the work
+  
