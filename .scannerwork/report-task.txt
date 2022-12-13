@@ -1,0 +1,7 @@
+organization=adityapratap12
+projectKey=adityapratap12_parliamenthouse
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.35306
+dashboardUrl=https://sonarcloud.io/dashboard?id=adityapratap12_parliamenthouse
+ceTaskId=AYT2S-w2kjsitORHirhU
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYT2S-w2kjsitORHirhU
