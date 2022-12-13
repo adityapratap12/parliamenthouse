@@ -5,20 +5,20 @@ phases:
     - apt-get update
     - apt-get -y install wget
     - apt-get -y install default-jdk
-    - wget https://github.com/zaproxy/zaproxy/releases/download/v2.11.1/ZAP_2.11.1_Linux.tar.gz
+    - wget https://github.com/zaproxy/zaproxy/releases/download/v2.12.0/ZAP_2.12.0_Linux.tar.gz
     - mkdir zap
     - mkdir report
-    - tar -xvf ZAP_2.11.1_Linux.tar.gz
-    - cd ZAP_2.11.1
+    - tar -xvf ZAP_2.12.0_Linux.tar.gz
+    - cd ZAP_2.12.0
     - mkdir generated_report
     - ls
     - pwd
-    - ./ZAP_2.11.1/zap.sh -help
-    - ./ZAP_2.11.1/zap.sh -cmd -quickurl https://ads.asmadiya.com -quickprogress -quickout generated_report/zap_report2.html 
+    - ./ZAP_2.12.0/zap.sh -help
+    - ./ZAP_2.12.0/zap.sh -cmd -quickurl https://ads.asmadiya.com -quickprogress -quickout generated_report/zap_report2.html 
 artifacts:
   files:
      - "**/*"
   discard-paths: no
-  base-directory: ZAP_2.11.1/generated_report
+  base-directory: ZAP_2.12.0/generated_report
 
   #looking for the work
