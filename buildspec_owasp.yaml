@@ -13,8 +13,8 @@ phases:
     - mkdir generated_report
     - ls
     - pwd
-    - ./zap.sh --help
-    - ./zap.sh -cmd -quickurl https://ads.asmadiya.com -quickprogress -quickout generated_report/zap_report2.html 
+    - ./ZAP_2.11.1/zap.sh --help
+    - ./ZAP_2.11.1/zap.sh -cmd -quickurl https://ads.asmadiya.com -quickprogress -quickout generated_report/zap_report2.html 
 artifacts:
   files:
      - "**/*"
