@@ -10,14 +10,13 @@ phases:
     - mkdir report
     - tar -xvf ZAP_2.11.1_Linux.tar.gz
     - cd ZAP_2.11.1
-    - mkdir report
+    - mkdir generated_report
     - ./zap.sh --help
-    - ./zap.sh -cmd -quickurl https://ads.asmadiya.com -quickprogress -quickout report/zap_report2.html 
+    - ./zap.sh -cmd -quickurl https://ads.asmadiya.com -quickprogress -quickout generated_report/zap_report2.html 
 artifacts:
   files:
      - "**/*"
   discard-paths: no
-  base-directory: ZAP_2.11.1/report
+  base-directory: ZAP_2.11.1/generated_report
 
   #looking for the work
-  
