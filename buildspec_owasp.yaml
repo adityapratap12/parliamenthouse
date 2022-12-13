@@ -7,11 +7,14 @@ phases:
     - apt-get -y install default-jdk
     - wget https://github.com/zaproxy/zaproxy/releases/download/v2.11.1/ZAP_2.11.1_Linux.tar.gz
     - mkdir zap
+    - mkdir report
     - tar -xvf ZAP_2.11.1_Linux.tar.gz
     - cd ZAP_2.11.1
-    - ./zap.sh -cmd -quickurl https://ads.asmadiya.com -quickprogress -quickout ../zap_report2.html 
+    - mkdir report
+    - ./zap.sh --help
+    - ./zap.sh -cmd -quickurl https://ads.asmadiya.com -quickprogress -quickout report/zap_report2.html 
 artifacts:
   files:
-     -"**/*"
+     - "**/*"
   discard-paths: no
-  base-directory: dist/admin
+  base-directory: ZAP_2.11.1/report
