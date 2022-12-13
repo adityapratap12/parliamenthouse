@@ -11,6 +11,8 @@ phases:
     - tar -xvf ZAP_2.11.1_Linux.tar.gz
     - cd ZAP_2.11.1
     - mkdir generated_report
+    - ls
+    - pwd
     - ./zap.sh --help
     - ./zap.sh -cmd -quickurl https://ads.asmadiya.com -quickprogress -quickout generated_report/zap_report2.html 
 artifacts:
