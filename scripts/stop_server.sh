@@ -1,1 +1,2 @@
-echo "stop server works"
+# echo "stop server works"
+rm -rf /home/ubuntu/shuvam
