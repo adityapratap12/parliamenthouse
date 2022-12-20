@@ -1,2 +1,2 @@
 # echo "stop server works"
-rm -rf /home/ubuntu/shuvam
+rm -rf C:\ProgramData\Amazon\CodeDeploy\HelloWorldApp
