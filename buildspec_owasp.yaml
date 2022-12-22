@@ -1,4 +1,4 @@
-version: 0.1
+version: 0.2
 phases:
   build:
     commands: 
@@ -11,16 +11,20 @@ phases:
     - mkdir generated_report
     - ls
     - pwd
-    - ./ZAP_2.12.0/zap.sh -help
-    - ./ZAP_2.12.0/zap.sh -cmd -quickurl http://33f5-2401-4900-1c89-d2ac-1502-8ca-8ea-3ce0.ngrok.io -quickprogress -quickout ../generated_report/zap_report2.html
+    # - ./ZAP_2.12.0/zap.sh -help
+    # - ./ZAP_2.12.0/zap.sh -cmd -quickurl http://33f5-2401-4900-1c89-d2ac-1502-8ca-8ea-3ce0.ngrok.io -quickprogress -quickout ../generated_report/zap_report2.html
+    - touch dummy.txt
+    - cp dummy.txt generated_report
+  post_build:
+    commands:
     - ls generated_report
     - ls
     - pwd
 artifacts:
   files:
-     - "**/*"
+    - "**/*"
   discard-paths: no
-  base-directory: generated_report/
+  base-directory: generated_report
 
   #looking for the work
 # version: 0.2
