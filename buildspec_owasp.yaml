@@ -1,5 +1,10 @@
 version: 0.2
 phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      - echo "Installing completed"
   build:
     commands: 
     - apt-get update
@@ -25,44 +30,3 @@ artifacts:
     - "**/*"
   discard-paths: no
   base-directory: generated_report
-
-  #looking for the work
-# version: 0.2
-# phases:
-#   install:
-#     commands:
-#       - echo "install phase....."
-#   pre_build:
-#     commands:
-#       - scanid=$(curl "localhost:8081/JSON/ascan/action/scan/?apikey=rh7jpr8lg9d6gb5ht7khru0qq9&recurse=true&inScopeOnly=&scanPolicyName=&method=&postData=&contextId=&url=https://ads.asmadiya.com" | jq -r '.scan')
-#       - echo "scan id is " $scanid
-#       - |
-#         stat=50;
-#         while [ "$stat" != 100 ]; do
-#           stat=$(curl "localhost:8081/JSON/ascan/view/status/?apikey=rh7jpr8lg9d6gb5ht7khru0qq9&scanId=$scanid" | jq -r '.status');
-#           echo "OWASP ZAP scan status is $stat"
-#           echo "OWASP Zap analysis status is in progress...";
-#           sleep 5;
-#         done
-#         echo "OWASP Zap analysis status is completed..."; 
-#       - high_alerts=$(curl "localhost:8081/JSON/alert/view/alertsSummary/?apikey=rh7jpr8lg9d6gb5ht7khru0qq9&baseurl=https://ads.asmadiya.com" | jq -r '.alertsSummary.High')
-#       - medium_alerts=$(curl "localhost:8081/JSON/alert/view/alertsSummary/?apikey=rh7jpr8lg9d6gb5ht7khru0qq9&baseurl=https://ads.asmadiya.com" | jq -r '.alertsSummary.Meduim')
-#       # - echo "high alerts are $high_alerts"    
-#   build:
-#     commands: 
-#       - curl "localhost:8081/OTHER/core/other/jsonreport/?apikey=rh7jpr8lg9d6gb5ht7khru0qq9" | jq . > zap-scan-results.json
-#       - echo "build stage completed"
-#   post_build:
-#     commands:
-#       # - | 
-#       #   jq "{ \"messageType\": \"CodeScanReport\", \"reportType\": \"OWASP-Zap\", \
-#       #   \"createdAt\": $(date +\"%Y-%m-%dT%H:%M:%S.%3NZ\"), \"source_repository\": env.CODEBUILD_SOURCE_REPO_URL, \
-#       #   \"source_branch\": env.CODEBUILD_SOURCE_VERSION, \
-#       #   \"build_id\": env.CODEBUILD_BUILD_ID, \
-#       #   \"source_commitid\": env.CODEBUILD_RESOLVED_SOURCE_VERSION, \
-#       #   \"report\": . }" zap-scan-results.json > payload.json
-#       #   aws lambda invoke --function-name ImpToSecurityHubEKS --payload file://payload.json owaspzap_scan_report.json && echo "LAMBDA_SUCCEDED" || echo "LAMBDA_FAILED";
-#       # - if [ $high_alerts != 0 ] || [ $medium_alerts != 0 ]; then echo "there are high or medium alerts.. failing the build" && exit 1; else exit 0; fi
-# artifacts:
-#   type: zip
-#   files: '**/*'
