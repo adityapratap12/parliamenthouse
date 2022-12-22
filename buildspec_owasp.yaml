@@ -7,7 +7,6 @@ phases:
     - apt-get -y install default-jdk
     - wget https://github.com/zaproxy/zaproxy/releases/download/v2.12.0/ZAP_2.12.0_Linux.tar.gz
     - mkdir zap
-    - mkdir report
     - tar -xvf ZAP_2.12.0_Linux.tar.gz
     - mkdir generated_report
     - ls
@@ -15,11 +14,13 @@ phases:
     - ./ZAP_2.12.0/zap.sh -help
     - ./ZAP_2.12.0/zap.sh -cmd -quickurl http://33f5-2401-4900-1c89-d2ac-1502-8ca-8ea-3ce0.ngrok.io -quickprogress -quickout ../generated_report/zap_report2.html
     - ls generated_report
+    - ls
+    - pwd
 artifacts:
   files:
      - "**/*"
   discard-paths: no
-  base-directory: generated_report
+  base-directory: generated_report/
 
   #looking for the work
 # version: 0.2
