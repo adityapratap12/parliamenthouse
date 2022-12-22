@@ -13,7 +13,8 @@ phases:
     - ls
     - pwd
     - ./ZAP_2.12.0/zap.sh -help
-    - ./ZAP_2.12.0/zap.sh -cmd -quickurl http://33f5-2401-4900-1c89-d2ac-1502-8ca-8ea-3ce0.ngrok.io -quickprogress -quickout ../generated_report/zap_report2.html 
+    - ./ZAP_2.12.0/zap.sh -cmd -quickurl http://33f5-2401-4900-1c89-d2ac-1502-8ca-8ea-3ce0.ngrok.io -quickprogress -quickout ../generated_report/zap_report2.html
+    - ls generated_report
 artifacts:
   files:
      - "**/*"
