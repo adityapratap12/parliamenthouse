@@ -34,3 +34,5 @@ artifacts:
     - "**/*"
   discard-paths: no
   base-directory: generated_report
+
+# jsut for fun 
